@@ -1,0 +1,65 @@
+﻿@model SysTracker.Models.Link
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Link</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Server, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.ServerID, new SelectList(ViewBag.Servers, "ServerID", "Name"))
+            <div class="text-danger">
+                @Html.ValidationMessageFor(m => m.ServerID)
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.System, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.SystemsID, new SelectList(ViewBag.Systems, "SystemsID", "Name"))
+            <div class="text-danger">
+                @Html.ValidationMessageFor(m => m.SystemsID)
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ServerType, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.ServerTypeID, new SelectList(ViewBag.ServerTypes, "ServerTypeID", "Name"))
+            <div class="text-danger">
+                @Html.ValidationMessageFor(model => model.ServerTypeID)
+            </div>
+        </div>
+        @Html.Hidden("oldServerID", Model.ServerID)
+        @Html.Hidden("oldSystemsID", Model.SystemsID)
+        @Html.Hidden("oldServerTypeID", Model.ServerTypeID)
+        @Html.HiddenFor(m => m.ServerID)
+        @Html.HiddenFor(m => m.SystemsID)
+        @Html.HiddenFor(m => m.ServerTypeID)
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

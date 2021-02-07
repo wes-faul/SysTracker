@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SysTracker.Models.Link>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Server)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.System)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServerType)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Server.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.System.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServerType.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { serverID=item.ServerID, systemID = item.SystemsID, serverTypeID = item.ServerTypeID }) |
+            @*@Html.ActionLink("Details", "Details", new { serverID = item.ServerID, systemID = item.SystemsID, serverTypeID = item.ServerTypeID }) |*@
+            @Html.ActionLink("Delete", "Delete", new { serverID = item.ServerID, systemID = item.SystemsID, serverTypeID = item.ServerTypeID })
+        </td>
+    </tr>
+}
+
+</table>
