@@ -26,17 +26,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Server.Name)
+            @Html.ActionLink(item.Server.Name, "Details", "Servers", new { id = item.ServerID }, null)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.System.Name)
+            @Html.ActionLink(item.System.Name, "Details", "Systems", new { id = item.SystemsID }, null)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ServerType.Name)
+            @Html.ActionLink(item.ServerType.Name, "Details", "ServerTypes", new { id = item.ServerTypeID }, null)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { serverID=item.ServerID, systemID = item.SystemsID, serverTypeID = item.ServerTypeID }) |
-            @*@Html.ActionLink("Details", "Details", new { serverID = item.ServerID, systemID = item.SystemsID, serverTypeID = item.ServerTypeID }) |*@
             @Html.ActionLink("Delete", "Delete", new { serverID = item.ServerID, systemID = item.SystemsID, serverTypeID = item.ServerTypeID })
         </td>
     </tr>

@@ -24,6 +24,7 @@ namespace SysTracker.Models
         [Required(ErrorMessage = "Server Type is required")]
         public Guid ServerTypeID { get; set; }
 
+        //for navigation through EF
         public virtual Server Server { get; set; }
         public virtual Systems System { get; set; }
         public virtual ServerType ServerType { get; set; }

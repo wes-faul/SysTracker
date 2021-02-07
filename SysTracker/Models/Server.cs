@@ -23,6 +23,7 @@ namespace SysTracker.Models
         [StringLength(1024)]
         public string Description { get; set; }
 
+        //for navigation through EF
         public virtual ICollection<Link> Links { get; set; }
     }
 }

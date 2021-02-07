@@ -19,9 +19,11 @@ namespace SysTracker.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //Specify the composite key
             modelBuilder.Entity<Link>()
                 .HasKey(e => new { e.ServerID, e.SystemsID, e.ServerTypeID });
 
+            //set up joins to related records 
             modelBuilder.Entity<Link>()
                 .HasRequired(e => e.Server)
                 .WithMany(e => e.Links)
@@ -38,41 +40,6 @@ namespace SysTracker.Models
                 .HasRequired(e => e.ServerType)
                 .WithMany(e => e.Links)
                 .HasForeignKey(e => e.ServerTypeID);
-
-            /*
-            modelBuilder.Entity<UserAccount>()
-                .HasKey(e => new { e.UserId, e.AccountId });
-
-            modelBuilder.Entity<UserAccount>()
-                .HasRequired(e => e.User)
-                .WithMany(e => e.UserAccounts)
-                .HasForeignKey(e => e.UserId);
-
-            modelBuilder.Entity<UserAccount>()
-                .HasRequired(e => e.Account)
-                .WithMany(e => e.UserAccounts)
-                .HasForeignKey(e => e.AccountId);
-
-            modelBuilder.Entity<UserAccount>()
-                .HasRequired(e => e.Role)
-                .WithMany(e => e.UserAccounts)
-                .HasForeignKey(e => e.RoleId);
-                */
-
-            /*modelBuilder.Entity<Link>()
-                .Property(e => e.ServerID)
-                .IsFixedLength()
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Link>()
-                .Property(e => e.SystemsID)
-                .IsFixedLength()
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Link>()
-                .Property(e => e.ServerTypeID)
-                .IsFixedLength()
-                .IsUnicode(false);*/
         }
     }
 }

@@ -38,6 +38,7 @@ namespace SysTracker.Controllers
         // GET: Links/Create
         public ActionResult Create()
         {
+            //populate viewbag for drdopdown lists
             ViewBag.Systems = db.Systems.OrderBy(m => m.Name).ToList();
             ViewBag.Servers = db.Servers.OrderBy(m => m.Name).ToList();
             ViewBag.ServerTypes = db.ServerTypes.OrderBy(m => m.Name).ToList();
@@ -64,6 +65,7 @@ namespace SysTracker.Controllers
                     ModelState.AddModelError("", "This is a duplicate");
                 }
             }
+            //populate viewbag for drdopdown lists
             ViewBag.Systems = db.Systems.OrderBy(m => m.Name).ToList();
             ViewBag.Servers = db.Servers.OrderBy(m => m.Name).ToList();
             ViewBag.ServerTypes = db.ServerTypes.OrderBy(m => m.Name).ToList();
@@ -82,6 +84,7 @@ namespace SysTracker.Controllers
             {
                 return HttpNotFound();
             }
+            //populate viewbag for drdopdown lists
             ViewBag.Systems = db.Systems.OrderBy(m => m.Name).ToList();
             ViewBag.Servers = db.Servers.OrderBy(m => m.Name).ToList();
             ViewBag.ServerTypes = db.ServerTypes.OrderBy(m => m.Name).ToList();
@@ -97,9 +100,11 @@ namespace SysTracker.Controllers
         public ActionResult Edit(Guid serverID, Guid systemsID, Guid serverTypeID, Guid oldServerID, Guid oldSystemsID, Guid oldServerTypeID)
         {
             Link link = db.Links.Find(oldServerID, oldSystemsID, oldServerTypeID);
+            //to see if it already exists
             Link testLink = db.Links.Find(serverID, systemsID, serverTypeID);
             if (ModelState.IsValid && testLink == null)
             {
+                //EF doesnt like updating composite keys.  So remove the old record and create a new one.
                 db.Links.Remove(link);
                 Link newLink = new Link
                 {
@@ -112,10 +117,12 @@ namespace SysTracker.Controllers
                 return RedirectToAction("Index");
 
             }
+            //throw an error if it already exists
             if (testLink!=null)
             {
                 ModelState.AddModelError("", "This is a duplicate");
             }
+            //populate viewbag for drdopdown lists
             ViewBag.Systems = db.Systems.OrderBy(m => m.Name).ToList();
             ViewBag.Servers = db.Servers.OrderBy(m => m.Name).ToList();
             ViewBag.ServerTypes = db.ServerTypes.OrderBy(m => m.Name).ToList();

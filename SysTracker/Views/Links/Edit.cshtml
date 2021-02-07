@@ -44,6 +44,7 @@
                 @Html.ValidationMessageFor(model => model.ServerTypeID)
             </div>
         </div>
+        <!--for storing the old IDs so we can delete and recreate in the controller-->
         @Html.Hidden("oldServerID", Model.ServerID)
         @Html.Hidden("oldSystemsID", Model.SystemsID)
         @Html.Hidden("oldServerTypeID", Model.ServerTypeID)

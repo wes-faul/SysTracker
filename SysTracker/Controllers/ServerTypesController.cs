@@ -111,6 +111,7 @@ namespace SysTracker.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             ServerType serverType = db.ServerTypes.Find(id);
+            //Check to make sure its not in use anywhere
             if (serverType.Links.Count > 0)
             {
                 ModelState.AddModelError("", "You cannot delete this server type.  There are related systems and servers.  View them through the Details page and delete the link before deleting this.");

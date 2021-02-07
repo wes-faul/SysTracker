@@ -111,6 +111,7 @@ namespace SysTracker.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             Systems systems = db.Systems.Find(id);
+            //Check to make sure its not in use anywhere
             if (systems.Links.Count > 0)
             {
                 ModelState.AddModelError("", "You cannot delete this system.  There are related servers and server types.  View them through the Details page and delete the link before deleting this.");
